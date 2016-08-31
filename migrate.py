@@ -171,7 +171,7 @@ def main():
         pyrax.set_setting('identity_type', RACKSPACE_IDENTITY_TYPE)
         pyrax.set_credentials(RACKSPACE_USERNAME, RACKSPACE_API_KEY)
         container = pyrax.cloudfiles.get_container(rackspace_container)
-        fetch_filenames(container)
+        fetch_filenames(container, id_filename)
     elif args.action == 'setup':
         total = redis_connection.llen(redis_key)
         if total > 0:
