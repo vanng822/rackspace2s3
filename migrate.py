@@ -83,10 +83,10 @@ def worker_s3(container, redis_connection, stop_signal):
             return
 
         try:
-            logger.info('uploading: ' + image_name)
             img_data = get_image_data(container, image_name)
             img = io.BytesIO(img_data)
             s3.upload_fileobj(img, s3_bucket, image_name)
+            logger.info('uploading: ' + image_name)
         except Exception:
             logger.exception('Failed: ' + image_name)
             redis_connection.rpush(redis_key, image_name)
